@@ -1,0 +1,2 @@
+FROM ehirdoy/fw-nrfconnect-nrf-docker
+CMD bash -c 'source ncs/zephyr/zephyr-env.sh && west flash -d build'

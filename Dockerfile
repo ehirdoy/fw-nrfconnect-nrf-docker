@@ -36,7 +36,7 @@ RUN mkdir /workdir/ncs && \
 
 # Build image, contains project-specific dependencies
 FROM base
-COPY . /workdir/ncs/nrf
+RUN git clone https://github.com/NordicPlayground/fw-nrfconnect-nrf /workdir/ncs/nrf
 RUN \
     # Zephyr requirements of nrf
     cd /workdir/ncs/nrf; west init -l && \
@@ -45,8 +45,7 @@ RUN \
     pip3 install -r nrf/scripts/requirements.txt && \
     pip3 install -r bootloader/mcuboot/scripts/requirements.txt && \
     echo "source /workdir/ncs/zephyr/zephyr-env.sh" >> ~/.bashrc && \
-    mkdir /workdir/.cache && \
-    rm -rf /workdir/ncs/nrf
+    mkdir /workdir/.cache
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
